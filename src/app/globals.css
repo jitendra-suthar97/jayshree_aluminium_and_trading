@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+/* ---------- Stage 3 design tokens (shadcn/ui semantic layer mapped onto the JAYSHREE palette) ---------- */
+
+/* Palette: always emitted so the semantic tokens below can reference it. Tailwind defaults removed on purpose. */
+@theme static {
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-ink: #1b1e2b;
+  --color-text-secondary: #565d6b;
+  --color-grey-100: #eef0f3;
+  --color-line: #c9ced6; /* decorative dividers and card borders only (1.6:1 on white) */
+  --color-line-strong: #6b7280; /* control borders (4.8:1 on white) */
+  --color-blue-50: #eceef7;
+  --color-blue-600: #444c9c; /* primary */
+  --color-blue-700: #363d82;
+  --color-blue-800: #2a3068;
+  --color-brand-orange: #dc7414; /* ONLY: active-nav indicator and How We Work step tiles */
+  --color-whatsapp: #25d366; /* WhatsApp button only */
+  --color-whatsapp-hover: #1fbf5c;
+  --color-error: #b42318;
+  --color-success: #1a7f37;
+}
+
+/* shadcn/ui semantic tokens -> JAYSHREE palette. Note: shadcn's "accent" is a hover surface (blue-50), NOT our orange. */
+@theme inline {
+  --color-background: var(--color-white);
+  --color-foreground: var(--color-ink);
+  --color-card: var(--color-white);
+  --color-card-foreground: var(--color-ink);
+  --color-popover: var(--color-white);
+  --color-popover-foreground: var(--color-ink);
+  --color-primary: var(--color-blue-600);
+  --color-primary-foreground: var(--color-white);
+  --color-secondary: var(--color-grey-100);
+  --color-secondary-foreground: var(--color-ink);
+  --color-muted: var(--color-grey-100);
+  --color-muted-foreground: var(--color-text-secondary);
+  --color-accent: var(--color-blue-50);
+  --color-accent-foreground: var(--color-blue-600);
+  --color-destructive: var(--color-error);
+  --color-border: var(--color-line);
+  --color-input: var(--color-line-strong);
+  --color-ring: var(--color-blue-600);
+}
+
+@theme {
+  /* Shape and elevation (max 4px radius, one shadow for popovers) */
+  --radius-*: initial;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 4px;
+  --radius-xl: 4px;
+  --shadow-*: initial;
+  --shadow-pop: 0 8px 24px rgba(27, 30, 43, 0.12);
+
+  /* Type scale (mobile values; overridden at md and lg below) */
+  --text-display: 2.125rem;
+  --text-display--line-height: 2.5rem;
+  --text-h1: 1.875rem;
+  --text-h1--line-height: 2.25rem;
+  --text-h2: 1.5rem;
+  --text-h2--line-height: 1.875rem;
+  --text-h3: 1.25rem;
+  --text-h3--line-height: 1.625rem;
+  --text-h4: 1.125rem;
+  --text-h4--line-height: 1.5rem;
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.75rem;
+  --text-body: 1rem;
+  --text-body--line-height: 1.625rem;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.25rem;
+  --text-label: 0.8125rem;
+  --text-label--line-height: 1rem;
+}
+
+@theme inline {
+  --font-heading: var(--font-archivo), ui-sans-serif, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+@layer base {
+  :root {
+    --shadow-focus: 0 0 0 2px #ffffff, 0 0 0 4px #444c9c;
+    --size-sticky-bar: 3.5rem;
+  }
+
+  @media (min-width: 48rem) {
+    :root {
+      --text-display: 2.75rem;
+      --text-display--line-height: 3.125rem;
+      --text-h1: 2.25rem;
+      --text-h1--line-height: 2.625rem;
+      --text-h2: 1.75rem;
+      --text-h2--line-height: 2.125rem;
+      --text-h3: 1.375rem;
+      --text-h3--line-height: 1.75rem;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    :root {
+      --text-display: 3.5rem;
+      --text-display--line-height: 3.75rem;
+      --text-h1: 2.75rem;
+      --text-h1--line-height: 3.125rem;
+      --text-h2: 2.125rem;
+      --text-h2--line-height: 2.5rem;
+      --text-h3: 1.5rem;
+      --text-h3--line-height: 1.875rem;
+    }
+  }
+
+  html {
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background: var(--color-white);
+    color: var(--color-ink);
+    font-family: var(--font-inter), ui-sans-serif, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-archivo), ui-sans-serif, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  /* Hard-edged focus ring (white gap + blue ring). Works on white and on photos. */
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
