@@ -4,10 +4,11 @@
 Position JAYSHREE Aluminium & Trading as a considered local aluminium-and-glass fabrication brand. The experience should feel calm, precise, architectural and trustworthy rather than like a generic template or a crowded product catalogue.
 
 ## Visual system
-- **Palette:** warm white surfaces, soft stone section backgrounds, charcoal typography, restrained brushed-bronze accents.
+- **Base palette:** warm white surfaces, soft stone section backgrounds and charcoal typography.
+- **Brand accents:** use the logo's existing blue and orange sparingly for links, focus states, small markers and selected actions. Keep red reserved for occasional brand emphasis rather than large surfaces.
 - **Typography:** retain the locally hosted Archivo display face and Inter body face; use larger editorial headlines, tighter display tracking and readable body copy.
 - **Layout:** generous whitespace, thin dividers, simple square-edged geometry and restrained hover motion.
-- **Logo:** keep the owner-supplied PNG unchanged and on a light surface. Do not recolour, trace, crop or regenerate it.
+- **Logo:** the owner-confirmed logo is the source of truth. Keep the supplied PNG unchanged and on a light surface. Do not recolour, trace, crop or regenerate it.
 - **Imagery:** use only real photographs of completed aluminium and glass work. Never present AI-generated images or stock imagery as completed customer projects.
 
 ## Homepage hierarchy
