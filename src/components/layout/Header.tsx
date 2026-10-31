@@ -20,30 +20,27 @@ import { services } from "@/data/services";
 import { site } from "@/data/site";
 import { cn } from "@/lib/utils";
 
-// Active item: bold + 3px orange bar on the header's bottom edge (never colour alone)
 const navItem = (active: boolean) =>
   cn(
-    "relative flex h-full items-center px-4 text-base text-foreground transition-colors duration-150 hover:text-primary data-[state=open]:text-primary",
-    active ? "font-semibold after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:bg-brand-orange" : "font-medium",
+    "relative flex h-full items-center px-3 text-[15px] text-foreground transition-colors duration-150 hover:text-primary data-[state=open]:text-primary",
+    active
+      ? "font-semibold after:absolute after:inset-x-3 after:bottom-0 after:h-px after:bg-brand-orange"
+      : "font-medium",
   );
 
 export function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-
-  // Close the mobile menu after any navigation
   useEffect(() => setMenuOpen(false), [pathname]);
-
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background">
-      <Container wide className="flex h-14 items-center justify-between md:h-16 lg:h-[72px]">
-        <Link href="/" aria-label={`${site.name}, home`} className="inline-flex rounded-md">
-          <Logo className="h-10 md:h-12 lg:h-[52px]" />
+    <header className="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur-sm">
+      <Container wide className="flex h-[68px] items-center justify-between md:h-[76px]">
+        <Link href="/" aria-label={`${site.name}, home`} className="inline-flex rounded-sm">
+          <Logo className="h-9 md:h-11 lg:h-12" />
         </Link>
 
-        {/* Desktop navigation (shadcn NavigationMenu) */}
         <NavigationMenu aria-label="Primary" className="hidden lg:flex">
           <NavigationMenuList>
             {primaryNav.map((item) =>
@@ -51,25 +48,19 @@ export function Header() {
                 <NavigationMenuItem key={item.href}>
                   <NavigationMenuTrigger className={navItem(isActive(item.href))}>{item.label}</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul>
+                    <ul className="min-w-64 p-2">
                       {services.map((s) => (
                         <li key={s.slug}>
                           <NavigationMenuLink asChild>
-                            <Link
-                              href={`/services/${s.slug}/`}
-                              className="flex h-11 items-center px-4 text-base text-foreground hover:bg-accent hover:text-accent-foreground"
-                            >
+                            <Link href={`/services/${s.slug}/`} className="flex min-h-11 items-center px-3 text-sm text-foreground hover:bg-muted">
                               {s.name}
                             </Link>
                           </NavigationMenuLink>
                         </li>
                       ))}
-                      <li className="mt-1 border-t border-border pt-1">
+                      <li className="mt-1 border-t border-line pt-1">
                         <NavigationMenuLink asChild>
-                          <Link
-                            href="/services/"
-                            className="flex h-11 items-center px-4 text-base font-semibold text-primary hover:bg-accent"
-                          >
+                          <Link href="/services/" className="flex min-h-11 items-center px-3 text-sm font-semibold text-primary hover:bg-muted">
                             All services
                           </Link>
                         </NavigationMenuLink>
@@ -80,9 +71,7 @@ export function Header() {
               ) : (
                 <NavigationMenuItem key={item.href}>
                   <NavigationMenuLink asChild active={isActive(item.href)}>
-                    <Link href={item.href} className={navItem(isActive(item.href))}>
-                      {item.label}
-                    </Link>
+                    <Link href={item.href} className={navItem(isActive(item.href))}>{item.label}</Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               ),
@@ -92,9 +81,8 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <ButtonLink href="/contact/#quote" size="sm" className="hidden lg:inline-flex">
-            Request Quote
+            Start a project
           </ButtonLink>
-          {/* Tablet and mobile: Call button + menu sheet */}
           <MobileNav open={menuOpen} onOpenChange={setMenuOpen} pathname={pathname} />
         </div>
       </Container>
