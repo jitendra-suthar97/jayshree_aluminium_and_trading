@@ -24,7 +24,9 @@ import { cn } from "@/lib/utils";
 const navItem = (active: boolean) =>
   cn(
     "relative flex h-full items-center px-4 text-base text-foreground transition-colors duration-150 hover:text-primary data-[state=open]:text-primary",
-    active ? "font-semibold after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:bg-brand-orange" : "font-medium",
+    active
+      ? "font-semibold after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:bg-brand-orange"
+      : "font-medium",
   );
 
 export function Header() {
@@ -34,13 +36,21 @@ export function Header() {
   // Close the mobile menu after any navigation
   useEffect(() => setMenuOpen(false), [pathname]);
 
-  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background">
-      <Container wide className="flex h-14 items-center justify-between md:h-16 lg:h-[72px]">
-        <Link href="/" aria-label={`${site.name}, home`} className="inline-flex rounded-md">
-          <Logo className="h-10 md:h-12 lg:h-[52px]" />
+      <Container
+        wide
+        className="flex h-14 items-center justify-between md:h-16 lg:h-18"
+      >
+        <Link
+          href="/"
+          aria-label={`${site.name}, home`}
+          className="inline-flex rounded-md"
+        >
+          <Logo className="h-10 md:h-12 lg:h-13" />
         </Link>
 
         {/* Desktop navigation (shadcn NavigationMenu) */}
@@ -49,7 +59,11 @@ export function Header() {
             {primaryNav.map((item) =>
               "hasChildren" in item && item.hasChildren ? (
                 <NavigationMenuItem key={item.href}>
-                  <NavigationMenuTrigger className={navItem(isActive(item.href))}>{item.label}</NavigationMenuTrigger>
+                  <NavigationMenuTrigger
+                    className={navItem(isActive(item.href))}
+                  >
+                    {item.label}
+                  </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul>
                       {services.map((s) => (
@@ -80,7 +94,10 @@ export function Header() {
               ) : (
                 <NavigationMenuItem key={item.href}>
                   <NavigationMenuLink asChild active={isActive(item.href)}>
-                    <Link href={item.href} className={navItem(isActive(item.href))}>
+                    <Link
+                      href={item.href}
+                      className={navItem(isActive(item.href))}
+                    >
                       {item.label}
                     </Link>
                   </NavigationMenuLink>
@@ -91,11 +108,19 @@ export function Header() {
         </NavigationMenu>
 
         <div className="flex items-center gap-2">
-          <ButtonLink href="/contact/#quote" size="sm" className="hidden lg:inline-flex">
+          <ButtonLink
+            href="/contact/#quote"
+            size="sm"
+            className="hidden lg:inline-flex"
+          >
             Request Quote
           </ButtonLink>
           {/* Tablet and mobile: Call button + menu sheet */}
-          <MobileNav open={menuOpen} onOpenChange={setMenuOpen} pathname={pathname} />
+          <MobileNav
+            open={menuOpen}
+            onOpenChange={setMenuOpen}
+            pathname={pathname}
+          />
         </div>
       </Container>
     </header>
