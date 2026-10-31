@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
-/* JAYSHREE minimal identity: warm architectural neutrals, charcoal typography,
-   and a restrained brushed-bronze accent. Keep the supplied logo untouched. */
+/* Minimal JAYSHREE identity: warm architectural neutrals with restrained accents
+   sampled from the supplied red, blue and orange logo. The logo itself stays untouched. */
 @theme static {
   --color-*: initial;
   --color-white: #ffffff;
@@ -10,11 +10,12 @@
   --color-grey-100: #f5f4f0;
   --color-line: #e5e2da;
   --color-line-strong: #aaa79e;
-  --color-blue-50: #f1f0eb;
-  --color-blue-600: #343630;
-  --color-blue-700: #292b25;
-  --color-blue-800: #20211d;
-  --color-brand-orange: #a77b4b;
+  --color-blue-50: #f1f1fa;
+  --color-blue-600: #4546a8;
+  --color-blue-700: #393a91;
+  --color-blue-800: #2d2e76;
+  --color-brand-orange: #ed7611;
+  --color-brand-red: #e52421;
   --color-whatsapp: #25d366;
   --color-whatsapp-hover: #1fbf5c;
   --color-error: #b42318;
@@ -78,7 +79,7 @@
 
 @layer base {
   :root {
-    --shadow-focus: 0 0 0 2px #ffffff, 0 0 0 4px #343630;
+    --shadow-focus: 0 0 0 2px #ffffff, 0 0 0 4px #4546a8;
     --size-sticky-bar: 3.5rem;
   }
 
